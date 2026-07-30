@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 class AccountViewController {
 
-    @GetMapping("/categories")
+    @GetMapping("/accounts")
     public String accountPage() {
         return "account/accounts";
     }
