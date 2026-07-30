@@ -32,3 +32,9 @@ spring:
 jwt:
   secret:
   expiration: 3600000
+
+aes:
+  secret-key:
+
+hmac:
+  secret-key:
