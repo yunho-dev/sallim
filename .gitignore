@@ -5,6 +5,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### QueryDSL (IntelliJ 자체 빌드가 생성하는 Q클래스 - delegatedBuild=false라 build/generated/querydsl과 별도 경로) ###
+src/main/generated/
+
 ### STS ###
 .apt_generated
 .classpath
