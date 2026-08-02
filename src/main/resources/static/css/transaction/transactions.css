@@ -1,0 +1,383 @@
+/* ===== 카드 공통 (dashboard와 동일 톤) ===== */
+.card {
+    border: 1px solid #e6e9ee;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.page-pretitle {
+    color: #8a97a5;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.page-title {
+    font-size: 1.4375rem;
+    font-weight: 800;
+    color: var(--sallim-balance);
+    letter-spacing: -0.01em;
+}
+
+/* ===== 거래 추가 버튼 ===== */
+.btn-add {
+    background-color: var(--sallim-income);
+    border-color: var(--sallim-income);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.84375rem;
+    padding: 0.5625rem 1.125rem;
+}
+
+.btn-add:hover {
+    background-color: #255a43;
+    border-color: #255a43;
+    color: #fff;
+}
+
+/* ===== 필터 바 ===== */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 0.875rem 1.125rem;
+}
+
+.filter-divider {
+    width: 1px;
+    height: 24px;
+    background: #e6e9ee;
+}
+
+.month-selector {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    border: 1px solid #e6e9ee;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.month-selector .btn-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    color: #5b6b7b;
+    cursor: pointer;
+}
+
+.month-selector .btn-icon:hover {
+    background: #f4f6fa;
+    color: var(--sallim-balance);
+}
+
+.month-label {
+    min-width: 108px;
+    text-align: center;
+    font-size: 0.84375rem;
+    font-weight: 700;
+    color: var(--sallim-balance);
+}
+
+.filter-dropdown-btn {
+    min-width: 152px;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--sallim-balance);
+}
+
+.cat-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* 유형 세그먼트 토글 */
+.type-toggle {
+    margin-left: auto;
+    background: #F4F6FA;
+    border-radius: 8px;
+    padding: 3px;
+    gap: 0;
+}
+
+.type-toggle .btn {
+    border: none;
+    border-radius: 6px !important;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    padding: 7px 16px;
+    color: #8a97a5;
+    background: transparent;
+}
+
+.type-toggle .btn-check:checked + .btn {
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(30, 45, 61, 0.12);
+    color: var(--sallim-balance);
+}
+
+.type-toggle .btn-check:checked + .btn.btn-type-income {
+    color: var(--sallim-income);
+}
+
+.type-toggle .btn-check:checked + .btn.btn-type-expense {
+    color: var(--sallim-expense);
+}
+
+/* ===== 요약 카드 ===== */
+.summary-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.summary-icon-income {
+    background: rgba(45, 106, 79, 0.10);
+    color: var(--sallim-income);
+}
+
+.summary-icon-expense {
+    background: rgba(193, 96, 74, 0.10);
+    color: var(--sallim-expense);
+}
+
+.summary-icon-net {
+    background: rgba(30, 45, 61, 0.07);
+    color: var(--sallim-balance);
+}
+
+.summary-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #8a97a5;
+}
+
+.summary-value {
+    font-size: 1.1875rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-top: 2px;
+}
+
+/* ===== 카테고리 칩 ===== */
+.cat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 7px;
+}
+
+.cat-chip .cat-chip-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.cat-chip-income {
+    background: rgba(45, 106, 79, 0.10);
+    color: var(--sallim-income);
+}
+
+.cat-chip-expense {
+    background: rgba(193, 96, 74, 0.10);
+    color: var(--sallim-expense);
+}
+
+/* ===== 거래 테이블 (CSS Grid) ===== */
+.txn-table-head,
+.txn-row {
+    display: grid;
+    grid-template-columns: 96px 140px 1fr 160px 160px;
+    align-items: center;
+    gap: 16px;
+    padding: 0.8125rem 1.375rem;
+}
+
+.txn-table-head {
+    border-bottom: 1px solid #eef1f5;
+    background: #fafbfc;
+}
+
+.txn-table-head span {
+    font-size: 0.71875rem;
+    font-weight: 700;
+    color: #8a97a5;
+    letter-spacing: 0.03em;
+}
+
+.txn-group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5625rem 1.375rem;
+    background: #fafbfc;
+    border-bottom: 1px solid #eef1f5;
+}
+
+.txn-group-date {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #5b6b7b;
+}
+
+.txn-group-day {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #a4afba;
+}
+
+.txn-group-net {
+    margin-left: auto;
+    font-size: 0.71875rem;
+    font-weight: 700;
+}
+
+.txn-row {
+    border-bottom: 1px solid #f3f5f8;
+}
+
+.txn-row:hover {
+    background: #fafbfc;
+}
+
+.txn-row:last-child {
+    border-bottom: none;
+}
+
+.txn-day {
+    font-size: 0.78125rem;
+    font-weight: 600;
+    color: #a4afba;
+}
+
+.txn-desc {
+    font-size: 0.84375rem;
+    font-weight: 600;
+    color: var(--sallim-balance);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.txn-pay {
+    font-size: 0.78125rem;
+    font-weight: 600;
+    color: #5b6b7b;
+}
+
+.txn-amount {
+    text-align: right;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.txn-table-foot {
+    padding: 0.875rem 1.375rem;
+    background: #fafbfc;
+}
+
+.txn-table-foot .text-muted-sm {
+    font-size: 0.78125rem;
+    font-weight: 600;
+    color: #8a97a5;
+}
+
+/* ===== 모달: 유형/카테고리/결제수단 선택 칩 ===== */
+.modal-type-toggle {
+    display: flex;
+    background: #F4F6FA;
+    border-radius: 9px;
+    padding: 4px;
+}
+
+.modal-type-toggle .btn {
+    flex: 1;
+    border: none;
+    border-radius: 7px !important;
+    font-weight: 700;
+    font-size: 0.84375rem;
+    color: #8a97a5;
+    background: transparent;
+}
+
+.modal-type-toggle .btn-check:checked + .btn.btn-type-expense {
+    background: #fff;
+    color: var(--sallim-expense);
+    box-shadow: 0 1px 3px rgba(30, 45, 61, 0.12);
+}
+
+.modal-type-toggle .btn-check:checked + .btn.btn-type-income {
+    background: #fff;
+    color: var(--sallim-income);
+    box-shadow: 0 1px 3px rgba(30, 45, 61, 0.12);
+}
+
+.chip-select .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border: 1.5px solid #e6e9ee;
+    background: #fff;
+    border-radius: 9px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #5b6b7b;
+}
+
+.chip-select .btn-check:checked + .btn {
+    border-color: var(--sallim-expense);
+    background: rgba(193, 96, 74, 0.10);
+    color: var(--sallim-balance);
+}
+
+.chip-select.chip-select-income .btn-check:checked + .btn {
+    border-color: var(--sallim-income);
+    background: rgba(45, 106, 79, 0.10);
+    color: var(--sallim-balance);
+}
+
+.chip-select .btn .cat-chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.amount-input-wrap {
+    position: relative;
+}
+
+.amount-input-wrap .currency-prefix {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #8a97a5;
+}
+
+.amount-input-wrap input {
+    padding-left: 30px;
+    text-align: right;
+    font-weight: 700;
+}

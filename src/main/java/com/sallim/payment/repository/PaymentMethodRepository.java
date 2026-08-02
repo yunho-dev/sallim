@@ -13,4 +13,7 @@ public interface PaymentMethodRepository extends JpaRepository<PaymentMethod, Lo
 
     Optional<PaymentMethod> findByPaymentMethodIdAndMemberAndIsDeletedFalse(Long paymentMethodId, Member member);
 
+    // 목데이터 시더가 이미 있는 결제수단은 재사용하고 없을 때만 새로 만들기 위한 조회
+    Optional<PaymentMethod> findByMemberAndPaymentMethodName(Member member, String paymentMethodName);
+
 }

@@ -13,4 +13,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     Optional<Category> findByCategoryIdAndMemberAndIsDeletedFalse(Long categoryId, Member member);
 
+    // 목데이터 시더가 이미 있는 카테고리는 재사용하고 없을 때만 새로 만들기 위한 조회
+    Optional<Category> findByMemberAndCategoryName(Member member, String categoryName);
+
 }
