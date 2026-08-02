@@ -76,7 +76,7 @@ public class TransactionService {
                 .amount(request.amount())
                 .transactionDate(request.transactionDate())
                 .settlementDate(request.settlementDate())
-                .memo(request.memo())
+                .description(request.description())
                 .build();
 
         transactionRepository.save(transaction);
@@ -92,7 +92,7 @@ public class TransactionService {
         validateTypeMatchesCategory(request.type(), category);
 
         transaction.update(paymentMethod, category, request.type(), request.amount(),
-                request.transactionDate(), request.settlementDate(), request.memo());
+                request.transactionDate(), request.settlementDate(), request.description());
     }
 
     // 삭제 (soft delete) - 금융 기록은 법적 보관 의무가 있어 물리 삭제하지 않음

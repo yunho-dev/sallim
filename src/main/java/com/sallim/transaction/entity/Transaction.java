@@ -53,8 +53,8 @@ public class Transaction {
     @Column(name = "settlement_date")
     private LocalDate settlementDate;
 
-    @Column(name = "memo", length = 4000)
-    private String memo;
+    @Column(name = "description", length = 4000)
+    private String description;
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
@@ -66,25 +66,25 @@ public class Transaction {
 
     @Builder
     public Transaction(PaymentMethod paymentMethod, Category category, CategoryType type, BigDecimal amount,
-                        LocalDate transactionDate, LocalDate settlementDate, String memo) {
+                        LocalDate transactionDate, LocalDate settlementDate, String description) {
         this.paymentMethod = paymentMethod;
         this.category = category;
         this.type = type;
         this.amount = amount;
         this.transactionDate = transactionDate;
         this.settlementDate = settlementDate;
-        this.memo = memo;
+        this.description = description;
     }
 
     public void update(PaymentMethod paymentMethod, Category category, CategoryType type, BigDecimal amount,
-                        LocalDate transactionDate, LocalDate settlementDate, String memo) {
+                        LocalDate transactionDate, LocalDate settlementDate, String description) {
         this.paymentMethod = paymentMethod;
         this.category = category;
         this.type = type;
         this.amount = amount;
         this.transactionDate = transactionDate;
         this.settlementDate = settlementDate;
-        this.memo = memo;
+        this.description = description;
     }
 
     public void delete() {

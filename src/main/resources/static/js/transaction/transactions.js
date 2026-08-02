@@ -223,7 +223,7 @@ function txnRowHtml(tx) {
     <div class="txn-row">
       <span class="txn-day">${day}</span>
       <span><span class="cat-chip cat-chip-${typeClass}"><span class="cat-chip-dot" style="background:var(--sallim-${typeClass});"></span>${escapeHtml(tx.categoryName)}</span></span>
-      <span class="txn-desc">${escapeHtml(tx.memo || tx.categoryName)}</span>
+      <span class="txn-desc">${escapeHtml(tx.description || tx.categoryName)}</span>
       <span class="txn-pay">${escapeHtml(tx.paymentMethodName)}</span>
       <span class="txn-amount text-${typeClass}">${sign}₩${formatNumber(tx.amount)}</span>
     </div>
@@ -331,7 +331,7 @@ async function submitTransaction() {
   const amountRaw = document.getElementById('txnAmount').value.replace(/[^0-9]/g, '');
   const categoryId = document.querySelector('input[name="modal-cat"]:checked')?.value;
   const paymentMethodId = document.querySelector('input[name="modal-pay"]:checked')?.value;
-  const memo = document.getElementById('txnMemo').value.trim();
+  const description = document.getElementById('txnDescription').value.trim();
 
   if (!type || !transactionDate || !amountRaw || !categoryId || !paymentMethodId) {
     showError('txnError', '날짜, 금액, 카테고리, 결제수단을 모두 입력해주세요.');
@@ -352,7 +352,7 @@ async function submitTransaction() {
         amount: Number(amountRaw),
         transactionDate,
         settlementDate: null,
-        memo: memo || null,
+        description: description || null,
       }),
     });
 

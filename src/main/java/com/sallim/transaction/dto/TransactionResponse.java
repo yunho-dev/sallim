@@ -18,7 +18,7 @@ public record TransactionResponse(
         BigDecimal amount,
         LocalDate transactionDate,
         LocalDate settlementDate,
-        String memo,
+        String description,
         LocalDateTime insertDate
 ) {
     public static TransactionResponse from(Transaction transaction) {
@@ -33,7 +33,7 @@ public record TransactionResponse(
                 transaction.getAmount(),
                 transaction.getTransactionDate(),
                 transaction.getSettlementDate(),
-                transaction.getMemo(),
+                transaction.getDescription(),
                 transaction.getInsertDate()
         );
     }

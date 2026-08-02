@@ -198,7 +198,7 @@ public class MockDataSeeder implements ApplicationRunner {
     }
 
     private Transaction buildTx(PaymentMethod paymentMethod, Category category, CategoryType type,
-                                 BigDecimal amount, LocalDate date, String memo) {
+                                 BigDecimal amount, LocalDate date, String description) {
         return Transaction.builder()
                 .paymentMethod(paymentMethod)
                 .category(category)
@@ -206,7 +206,7 @@ public class MockDataSeeder implements ApplicationRunner {
                 .amount(amount)
                 .transactionDate(date)
                 .settlementDate(null)
-                .memo(memo)
+                .description(description)
                 .build();
     }
 

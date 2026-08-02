@@ -27,7 +27,7 @@ public record TransactionRequest(
         // 카드 실제 출금일 등에 쓰는 선택값 - 현재 UI엔 입력 폼이 없어 항상 null로 전달됨
         LocalDate settlementDate,
 
-        @Size(max = 4000, message = "메모는 4000자를 초과할 수 없습니다.")
-        String memo
+        @Size(max = 4000, message = "거래 내용은 4000자를 초과할 수 없습니다.")
+        String description
 ) {
 }
