@@ -32,14 +32,15 @@ public class TransactionService {
     private final PaymentMethodRepository paymentMethodRepository;
 
     // 목록 조회 (월 + 카테고리/결제수단/유형 필터, 페이징) - 필터 파라미터는 전부 선택값
+    // deleted=true면 휴지통 뷰(소프트 삭제된 거래만) 조회
     public Page<TransactionResponse> getTransactions(String memberId, int year, int month,
                                                        Long categoryId, Long paymentMethodId, CategoryType type,
-                                                       Pageable pageable) {
+                                                       boolean deleted, Pageable pageable) {
         Member member = getMember(memberId);
         LocalDate from = YearMonth.of(year, month).atDay(1);
         LocalDate to = YearMonth.of(year, month).atEndOfMonth();
 
-        return transactionRepository.search(member, from, to, categoryId, paymentMethodId, type, pageable)
+        return transactionRepository.search(member, from, to, categoryId, paymentMethodId, type, deleted, pageable)
                 .map(TransactionResponse::from);
     }
 
@@ -100,6 +101,16 @@ public class TransactionService {
     public void deleteTransaction(String memberId, Long transactionId) {
         Transaction transaction = getOwnedTransaction(memberId, transactionId);
         transaction.delete();
+    }
+
+    // 복구 - 휴지통 뷰에서 소프트 삭제된 거래만 대상으로 함
+    @Transactional
+    public void restoreTransaction(String memberId, Long transactionId) {
+        Member member = getMember(memberId);
+        Transaction transaction = transactionRepository
+                .findByTransactionIdAndPaymentMethod_MemberAndIsDeletedTrue(transactionId, member)
+                .orElseThrow(() -> new IllegalArgumentException("삭제된 거래내역이 아니거나 존재하지 않습니다."));
+        transaction.restore();
     }
 
     private Member getMember(String memberId) {

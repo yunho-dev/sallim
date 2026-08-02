@@ -11,6 +11,7 @@ let currentPage = 0;
 let selectedCategoryId = null;
 let selectedPaymentMethodId = null;
 let selectedType = null; // null=전체, 'INCOME', 'EXPENSE'
+let showDeleted = false; // true면 휴지통 뷰(삭제된 거래만 조회)
 
 document.addEventListener('DOMContentLoaded', async () => {
   const today = new Date();
@@ -30,6 +31,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       currentPage = 0;
       reload();
     });
+  });
+
+  document.getElementById('btnToggleTrash').addEventListener('click', () => {
+    showDeleted = !showDeleted;
+    document.getElementById('btnToggleTrash').classList.toggle('active', showDeleted);
+    currentPage = 0;
+    loadTransactions();
   });
 
   document.getElementById('btnOpenModal').addEventListener('click', openCreateModal);
@@ -150,6 +158,7 @@ async function loadTransactions() {
     month: currentMonth,
     page: currentPage,
     size: PAGE_SIZE,
+    deleted: showDeleted,
   });
   if (selectedCategoryId) params.set('categoryId', selectedCategoryId);
   if (selectedPaymentMethodId) params.set('paymentMethodId', selectedPaymentMethodId);
@@ -173,6 +182,7 @@ function renderTransactions(page) {
 
   if (page.content.length === 0) {
     bodyEl.innerHTML = '';
+    emptyEl.textContent = showDeleted ? '삭제된 거래내역이 없습니다.' : '해당 조건의 거래내역이 없습니다.';
     emptyEl.classList.remove('d-none');
   } else {
     emptyEl.classList.add('d-none');
@@ -208,6 +218,7 @@ function renderTransactions(page) {
     }).join('');
 
     bodyEl.innerHTML = html;
+    bindRowActionButtons();
   }
 
   renderCountLabel(page);
@@ -219,6 +230,17 @@ function txnRowHtml(tx) {
   const sign = tx.type === 'INCOME' ? '+' : '−';
   const day = tx.transactionDate.slice(8, 10);
 
+  const actionHtml = showDeleted
+      ? `<button type="button" class="txn-action-btn txn-restore-btn" data-id="${tx.transactionId}" title="복구">복구</button>`
+      : `
+        <button type="button" class="txn-action-btn txn-delete-btn" data-id="${tx.transactionId}" title="삭제">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16Z"/>
+          </svg>
+        </button>
+      `;
+
   return `
     <div class="txn-row">
       <span class="txn-day">${day}</span>
@@ -226,8 +248,43 @@ function txnRowHtml(tx) {
       <span class="txn-desc">${escapeHtml(tx.description || tx.categoryName)}</span>
       <span class="txn-pay">${escapeHtml(tx.paymentMethodName)}</span>
       <span class="txn-amount text-${typeClass}">${sign}₩${formatNumber(tx.amount)}</span>
+      <span class="txn-action">${actionHtml}</span>
     </div>
   `;
+}
+
+// 삭제/복구 버튼 - innerHTML로 매번 새로 그려지는 행이라 렌더 직후 다시 바인딩한다 (페이지네이션과 동일한 방식)
+function bindRowActionButtons() {
+  document.querySelectorAll('.txn-delete-btn').forEach(btn => {
+    btn.addEventListener('click', () => deleteTransaction(btn.dataset.id));
+  });
+  document.querySelectorAll('.txn-restore-btn').forEach(btn => {
+    btn.addEventListener('click', () => restoreTransaction(btn.dataset.id));
+  });
+}
+
+// 삭제 (soft delete)
+async function deleteTransaction(transactionId) {
+  if (!confirm('이 거래내역을 삭제하시겠습니까? 삭제된 항목은 "삭제된 항목" 필터에서 복구할 수 있습니다.')) return;
+
+  try {
+    const res = await fetch(`/api/transactions/${transactionId}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error('삭제에 실패했습니다.');
+    reload();
+  } catch (e) {
+    alert(e.message);
+  }
+}
+
+// 복구
+async function restoreTransaction(transactionId) {
+  try {
+    const res = await fetch(`/api/transactions/${transactionId}/restore`, { method: 'POST' });
+    if (!res.ok) throw new Error('복구에 실패했습니다.');
+    reload();
+  } catch (e) {
+    alert(e.message);
+  }
 }
 
 function renderCountLabel(page) {

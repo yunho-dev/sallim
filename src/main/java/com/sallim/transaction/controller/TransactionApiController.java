@@ -22,7 +22,7 @@ public class TransactionApiController {
 
     private final TransactionService transactionService;
 
-    // 목록 조회 (월 + 카테고리/결제수단/유형 필터, 페이징)
+    // 목록 조회 (월 + 카테고리/결제수단/유형 필터, 페이징) - deleted=true면 휴지통 뷰
     @GetMapping
     public ResponseEntity<Page<TransactionResponse>> getTransactions(
             Authentication authentication,
@@ -31,9 +31,10 @@ public class TransactionApiController {
             @RequestParam(required = false) Long categoryId,
             @RequestParam(required = false) Long paymentMethodId,
             @RequestParam(required = false) CategoryType type,
+            @RequestParam(required = false, defaultValue = "false") boolean deleted,
             @PageableDefault(size = 10) Pageable pageable) {
         Page<TransactionResponse> transactions = transactionService.getTransactions(
-                authentication.getName(), year, month, categoryId, paymentMethodId, type, pageable);
+                authentication.getName(), year, month, categoryId, paymentMethodId, type, deleted, pageable);
         return ResponseEntity.ok(transactions);
     }
 
@@ -72,6 +73,13 @@ public class TransactionApiController {
     public ResponseEntity<Void> deleteTransaction(Authentication authentication, @PathVariable Long transactionId) {
         transactionService.deleteTransaction(authentication.getName(), transactionId);
         return ResponseEntity.noContent().build();
+    }
+
+    // 복구 (휴지통 뷰에서 소프트 삭제된 거래만 대상)
+    @PostMapping("/{transactionId}/restore")
+    public ResponseEntity<Void> restoreTransaction(Authentication authentication, @PathVariable Long transactionId) {
+        transactionService.restoreTransaction(authentication.getName(), transactionId);
+        return ResponseEntity.ok().build();
     }
 
 }

@@ -95,6 +95,17 @@
                         <label class="btn btn-type-expense" for="type-expense">지출</label>
                     </div>
 
+                    <div class="filter-divider"></div>
+
+                    <!-- 휴지통 뷰 토글 -->
+                    <button type="button" class="btn btn-outline-secondary filter-dropdown-btn" id="btnToggleTrash" title="삭제된 거래내역 보기">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16Z"/>
+                        </svg>
+                        삭제된 항목
+                    </button>
+
                 </div>
             </div>
 
@@ -164,6 +175,7 @@
                     <span>내용</span>
                     <span>결제수단</span>
                     <span class="text-end">금액</span>
+                    <span></span>
                 </div>
 
                 <div id="txn-body"></div>

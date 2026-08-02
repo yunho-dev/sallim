@@ -204,7 +204,7 @@
 .txn-table-head,
 .txn-row {
     display: grid;
-    grid-template-columns: 96px 140px 1fr 160px 160px;
+    grid-template-columns: 96px 140px 1fr 160px 160px 64px;
     align-items: center;
     gap: 16px;
     padding: 0.8125rem 1.375rem;
@@ -287,6 +287,50 @@
     font-size: 0.875rem;
     font-weight: 700;
     letter-spacing: -0.01em;
+}
+
+.txn-action {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 행 액션 버튼 (삭제/복구) */
+.txn-row .txn-action-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    color: #a4afba;
+    cursor: pointer;
+}
+
+.txn-row .txn-action-btn:hover {
+    background: rgba(193, 96, 74, 0.10);
+    color: var(--sallim-expense);
+}
+
+.txn-row .txn-action-btn.txn-restore-btn {
+    width: auto;
+    padding: 0 10px;
+    font-size: 0.71875rem;
+    font-weight: 700;
+    color: var(--sallim-income);
+}
+
+.txn-row .txn-action-btn.txn-restore-btn:hover {
+    background: rgba(45, 106, 79, 0.10);
+}
+
+/* 휴지통 뷰 토글 버튼의 활성 상태 */
+.filter-bar #btnToggleTrash.active {
+    background: rgba(193, 96, 74, 0.10);
+    border-color: rgba(193, 96, 74, 0.35);
+    color: var(--sallim-expense);
 }
 
 .txn-table-foot {

@@ -91,4 +91,8 @@ public class Transaction {
         this.isDeleted = true;
     }
 
+    public void restore() {
+        this.isDeleted = false;
+    }
+
 }

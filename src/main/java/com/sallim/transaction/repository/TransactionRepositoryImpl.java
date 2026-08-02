@@ -26,10 +26,10 @@ public class TransactionRepositoryImpl implements TransactionRepositoryCustom {
     @Override
     public Page<Transaction> search(Member member, LocalDate from, LocalDate to,
                                      Long categoryId, Long paymentMethodId, CategoryType type,
-                                     Pageable pageable) {
+                                     boolean deleted, Pageable pageable) {
         BooleanBuilder condition = new BooleanBuilder()
                 .and(transaction.paymentMethod.member.eq(member))
-                .and(transaction.isDeleted.isFalse())
+                .and(transaction.isDeleted.eq(deleted))
                 .and(transaction.transactionDate.between(from, to));
 
         if (categoryId != null) {
