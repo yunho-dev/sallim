@@ -26,8 +26,7 @@ class AuthController {
     private final AuthService service;
     private final JwtProvider jwtProvider; // maxAge를 토큰 만료시간이랑 통일하려고 주입
 
-    // TODO: 랜딩 페이지 추가되면 "/" 매핑 제거
-    @GetMapping({"/", "/login"})
+    @GetMapping("/login")
     public String loginPage() {
         // 이미 인증된 사용자면 대시보드로 바로 보냄
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -50,7 +49,7 @@ class AuthController {
         if (memberId.isEmpty() || password.isEmpty()) {
             rAttr.addFlashAttribute("msg", "아이디/비밀번호를 입력해주세요.");
             logger.warn("아이디 혹은 비밀번호가 없습니다.");
-            return "redirect:/";
+            return "redirect:/login";
         }
 
         try {
@@ -69,7 +68,7 @@ class AuthController {
 
         } catch (IllegalArgumentException e) {
             rAttr.addFlashAttribute("msg", e.getMessage());
-            return "redirect:/";
+            return "redirect:/login";
         }
     }
 

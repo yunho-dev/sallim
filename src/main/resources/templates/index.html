@@ -1,34 +1,177 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>Sallim 임시 페이지</title>
-    <link href="/tabler/css/tabler.min.css" rel="stylesheet"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>살림 — 매일의 살림을 한눈에 정리해요</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Pretendard Variable', 'Pretendard', system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; background: #ffffff; color: #1E2D3D; }
+  a { color: #2D6A4F; text-decoration: none; }
+  a:hover { color: #245a42; }
+
+  .nav-link:hover { color: #1E2D3D !important; }
+  .btn-primary:hover { background: #245a42 !important; }
+  .btn-secondary:hover { border-color: #b7c0c9 !important; background: #f7f8fa !important; }
+</style>
 </head>
 <body>
-<div class="page">
-    <div class="container-xl py-4">
-        <h1 class="mb-4">Sallim 가계부</h1>
-        <div class="row row-deck row-cards">
-            <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="subheader">이번 달 지출</div>
-                        <div class="h1 mb-0">₩1,234,000</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="subheader">이번 달 수입</div>
-                        <div class="h1 mb-0">₩3,000,000</div>
-                    </div>
-                </div>
-            </div>
+
+<div style="min-height:100vh; display:flex; flex-direction:column;">
+
+  <!-- Header -->
+  <header style="position:sticky; top:0; z-index:10; background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); border-bottom:1px solid #eceff2;">
+    <div style="max-width:1180px; margin:0 auto; padding:0 24px; height:68px; display:flex; align-items:center; justify-content:space-between; gap:16px;">
+      <div style="display:flex; align-items:center; gap:10px; flex:none;">
+        <div style="color:#1E2D3D; width:26px; height:26px; display:flex; flex:none;">
+          <svg viewBox="0 0 200 200" width="100%" height="100%" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <g transform="translate(-6.25 -3.75)">
+              <path d="M60.0 154.0 Q52 154 52.0 146.0 L52.0 118.0 Q52 110 59.3 106.7 L140.7 69.3 Q148 66 148.0 74.0 L148.0 146.0 Q148 154 140.0 154.0 Z" stroke="currentColor" stroke-width="13" fill="none"/>
+              <line x1="52" y1="110" x2="148" y2="66" stroke="#2D6A4F" stroke-width="24"/>
+              <circle cx="148" cy="66" r="19" fill="#2D6A4F"/>
+            </g>
+          </svg>
         </div>
+        <span style="font-size:19px; font-weight:700; letter-spacing:-0.02em; color:#1E2D3D;">살림</span>
+      </div>
+      <nav style="display:flex; align-items:center; gap:28px; flex:1; justify-content:center; min-width:0;">
+        <a href="#" class="nav-link" onclick="alert('준비중입니다.'); return false;" style="font-size:14.5px; font-weight:500; color:#3d4c5c;">기능</a>
+        <a href="#" class="nav-link" onclick="alert('준비중입니다.'); return false;" style="font-size:14.5px; font-weight:500; color:#3d4c5c;">보안</a>
+        <a href="#" class="nav-link" onclick="alert('준비중입니다.'); return false;" style="font-size:14.5px; font-weight:500; color:#3d4c5c;">문의</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:10px; flex:none;">
+        <a href="/login" style="font-size:14px; font-weight:600; color:#1E2D3D; padding:8px 14px;">로그인</a>
+        <a href="/signup" class="btn-primary" style="font-size:14px; font-weight:600; color:#fff; background:#2D6A4F; padding:9px 18px; border-radius:7px; transition:background .12s; display:inline-block;">회원가입</a>
+      </div>
     </div>
+  </header>
+
+  <!-- Hero -->
+  <section style="flex:1; padding:clamp(56px,9vw,104px) 24px 0; display:flex; flex-direction:column; align-items:center; text-align:center;">
+    <div style="display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:#2D6A4F; background:#eaf3ee; padding:6px 14px; border-radius:100px; margin-bottom:24px;">
+      개인 가계부
+    </div>
+    <h1 style="font-size:clamp(30px,5vw,52px); font-weight:800; letter-spacing:-0.03em; line-height:1.22; margin:0 0 18px; max-width:820px;">매일의 살림을<br/>한눈에 정리해요</h1>
+    <p style="font-size:clamp(15px,2vw,18px); color:#5b6b7b; line-height:1.6; margin:0 0 36px; max-width:520px;">수입과 지출, 계좌와 카테고리를 한 곳에서 관리하는 심플한 가계부</p>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-bottom:clamp(48px,8vw,88px);">
+      <a href="/signup" class="btn-primary" style="font-size:15px; font-weight:700; color:#fff; background:#2D6A4F; padding:13px 28px; border-radius:8px; transition:background .12s; display:inline-block;">회원가입</a>
+      <a href="/login" class="btn-secondary" style="font-size:15px; font-weight:700; color:#1E2D3D; background:#fff; border:1px solid #dce0e6; padding:13px 28px; border-radius:8px; transition:border-color .12s, background .12s; display:inline-block;">로그인</a>
+    </div>
+  </section>
+
+  <!-- Dashboard mockup -->
+  <section style="padding:0 24px clamp(64px,9vw,108px); display:flex; justify-content:center;">
+    <div style="width:100%; max-width:1040px; background:#fbfcfd; border:1px solid #e6e9ee; border-radius:16px; box-shadow:0 24px 64px -24px rgba(30,45,61,0.18); overflow:hidden;">
+
+      <!-- window chrome -->
+      <div style="display:flex; align-items:center; gap:7px; padding:14px 18px; border-bottom:1px solid #eceff2;">
+        <div style="width:9px; height:9px; border-radius:50%; background:#e3e6ea;"></div>
+        <div style="width:9px; height:9px; border-radius:50%; background:#e3e6ea;"></div>
+        <div style="width:9px; height:9px; border-radius:50%; background:#e3e6ea;"></div>
+      </div>
+
+      <div style="padding:clamp(20px,4vw,36px);">
+        <!-- summary cards -->
+        <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
+          <div style="flex:1; min-width:160px; background:#fff; border:1px solid #eceff2; border-radius:10px; padding:16px 18px;">
+            <div style="font-size:12.5px; color:#7c8a98; margin-bottom:10px;">이번 달 수입</div>
+            <div style="font-size:clamp(18px,2.6vw,24px); font-weight:700; color:#1E2D3D;">₩4,685,000</div>
+          </div>
+          <div style="flex:1; min-width:160px; background:#fff; border:1px solid #eceff2; border-radius:10px; padding:16px 18px;">
+            <div style="font-size:12.5px; color:#7c8a98; margin-bottom:10px;">이번 달 지출</div>
+            <div style="font-size:clamp(18px,2.6vw,24px); font-weight:700; color:#1E2D3D;">₩1,117,700</div>
+          </div>
+          <div style="flex:1; min-width:160px; background:#fff; border:1px solid #eceff2; border-radius:10px; padding:16px 18px;">
+            <div style="font-size:12.5px; color:#7c8a98; margin-bottom:10px;">현재 잔액</div>
+            <div style="font-size:clamp(18px,2.6vw,24px); font-weight:700; color:#1E2D3D;">₩3,042,633</div>
+          </div>
+        </div>
+
+        <!-- chart row -->
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <div style="flex:2; min-width:280px; background:#fff; border:1px solid #eceff2; border-radius:10px; padding:18px 20px;">
+            <div style="font-size:13px; font-weight:600; color:#1E2D3D; margin-bottom:18px;">월별 수입/지출</div>
+            <div style="display:flex; align-items:flex-end; gap:clamp(12px,3vw,28px); height:140px;">
+
+              <div style="display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;">
+                <div style="display:flex; align-items:flex-end; gap:4px; height:110px;">
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#2D6A4F; height:98px;"></div>
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#C1604A; height:35px;"></div>
+                </div>
+                <div style="font-size:11px; color:#9aa7b4;">3월</div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;">
+                <div style="display:flex; align-items:flex-end; gap:4px; height:110px;">
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#2D6A4F; height:94px;"></div>
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#C1604A; height:39px;"></div>
+                </div>
+                <div style="font-size:11px; color:#9aa7b4;">4월</div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;">
+                <div style="display:flex; align-items:flex-end; gap:4px; height:110px;">
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#2D6A4F; height:74px;"></div>
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#C1604A; height:28px;"></div>
+                </div>
+                <div style="font-size:11px; color:#9aa7b4;">5월</div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;">
+                <div style="display:flex; align-items:flex-end; gap:4px; height:110px;">
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#2D6A4F; height:110px;"></div>
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#C1604A; height:46px;"></div>
+                </div>
+                <div style="font-size:11px; color:#9aa7b4;">6월</div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;">
+                <div style="display:flex; align-items:flex-end; gap:4px; height:110px;">
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#2D6A4F; height:106px;"></div>
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#C1604A; height:30px;"></div>
+                </div>
+                <div style="font-size:11px; color:#9aa7b4;">7월</div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;">
+                <div style="display:flex; align-items:flex-end; gap:4px; height:110px;">
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#2D6A4F; height:110px;"></div>
+                  <div style="width:14px; border-radius:3px 3px 0 0; background:#C1604A; height:26px;"></div>
+                </div>
+                <div style="font-size:11px; color:#9aa7b4;">8월</div>
+              </div>
+
+            </div>
+          </div>
+          <div style="flex:1; min-width:220px; background:#fff; border:1px solid #eceff2; border-radius:10px; padding:18px 20px; display:flex; flex-direction:column; align-items:center;">
+            <div style="font-size:13px; font-weight:600; color:#1E2D3D; margin-bottom:16px; align-self:flex-start;">카테고리별 지출</div>
+            <div style="width:132px; height:132px; border-radius:50%; background:conic-gradient(#C1604A 0% 70%, #d98a72 70% 86%, #e8b6a5 86% 96%, #f4dcd2 96% 100%); display:flex; align-items:center; justify-content:center;">
+              <div style="width:78px; height:78px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; text-align:center;">
+                <span style="font-size:11px; color:#9aa7b4;">총 지출</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top:1px solid #eceff2; padding:22px 24px; display:flex; align-items:center; justify-content:center; gap:8px;">
+    <div style="color:#9aa7b4; width:16px; height:16px; display:flex; flex:none;">
+      <svg viewBox="0 0 200 200" width="100%" height="100%" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(-6.25 -3.75)">
+          <path d="M60.0 154.0 Q52 154 52.0 146.0 L52.0 118.0 Q52 110 59.3 106.7 L140.7 69.3 Q148 66 148.0 74.0 L148.0 146.0 Q148 154 140.0 154.0 Z" stroke="currentColor" stroke-width="13" fill="none"/>
+          <line x1="52" y1="110" x2="148" y2="66" stroke="#2D6A4F" stroke-width="24"/>
+          <circle cx="148" cy="66" r="19" fill="#2D6A4F"/>
+        </g>
+      </svg>
+    </div>
+    <span style="font-size:13px; color:#9aa7b4;">© 2026 살림. All rights reserved.</span>
+  </footer>
+
 </div>
-<script src="/tabler/js/tabler.min.js"></script>
+
 </body>
 </html>
