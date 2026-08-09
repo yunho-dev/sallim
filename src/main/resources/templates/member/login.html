@@ -50,7 +50,7 @@
         <!-- 로그인 상태 유지 -->
         <div class="mb-4">
           <label class="form-check mb-0">
-            <input type="checkbox" class="form-check-input">
+            <input type="checkbox" id="rememberMe" class="form-check-input">
             <span class="form-check-label">로그인 상태 유지</span>
           </label>
         </div>
@@ -85,6 +85,13 @@
       const isHidden = password.type === 'password';
       password.type = isHidden ? 'text' : 'password';
       toggle.textContent = isHidden ? '숨김' : '표시';
+    });
+
+    const rememberMe = document.getElementById('rememberMe');
+
+    rememberMe.addEventListener('change', function () {
+      rememberMe.checked = false;
+      alert('아직 준비 중인 기능입니다.');
     });
   </script>
 </th:block>
