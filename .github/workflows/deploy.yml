@@ -35,10 +35,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: app-jar
-          path: .
+          path: artifact
 
       - name: Rename jar
-        run: mv $(find . -name "*.jar" ! -name "*-plain.jar" | head -1) app.jar
+        run: mv $(find artifact -name "*.jar" ! -name "*-plain.jar") app.jar
 
       - name: Copy jar to EC2
         uses: appleboy/scp-action@v0.1.7
