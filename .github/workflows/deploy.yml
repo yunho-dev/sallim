@@ -38,7 +38,7 @@ jobs:
           path: .
 
       - name: Rename jar
-        run: mv build/libs/*.jar app.jar
+        run: mv $(find . -name "*.jar" | head -1) app.jar
 
       - name: Copy jar to EC2
         uses: appleboy/scp-action@v0.1.7
