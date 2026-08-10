@@ -113,6 +113,49 @@
     color: var(--sallim-expense);
 }
 
+/* ===== 모바일: 필터 바 정리 =====
+   가로 flex-wrap이 min-width:152px 드롭다운 2개 + 세그먼트 토글을 어중간하게 줄바꿈시켜 지저분해 보이던 것을
+   767px 이하에서는 grid로 재배치: 월 선택(전체폭) → 카테고리/결제수단(2열) → 유형 토글(전체폭) → 삭제된 항목(전체폭) */
+@media (max-width: 767.98px) {
+    .filter-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 0.875rem 1rem;
+    }
+
+    .filter-divider {
+        display: none;
+    }
+
+    .month-selector {
+        grid-column: 1 / -1;
+        justify-content: center;
+    }
+
+    .filter-dropdown-btn {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #btnToggleTrash {
+        grid-column: 1 / -1;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .type-toggle {
+        grid-column: 1 / -1;
+        display: flex;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .type-toggle .btn {
+        flex: 1;
+    }
+}
+
 /* ===== 요약 카드 ===== */
 .summary-icon {
     width: 40px;
@@ -322,6 +365,57 @@
     font-size: 0.78125rem;
     font-weight: 600;
     color: #8a97a5;
+}
+
+.txn-table-foot {
+    flex-wrap: wrap;
+    row-gap: 8px;
+}
+
+.txn-table-foot .pagination {
+    flex-wrap: wrap;
+    row-gap: 6px;
+}
+
+/* ===== 모바일: 거래 테이블을 카드형으로 재배치 =====
+   그리드 컬럼(96/140/1fr/160/160/64px)이 최소 744px를 요구해 좁은 화면에서 넘침 →
+   767px 이하에서는 행마다 2열 카드 레이아웃으로 전환 (날짜/카테고리 - 내용 - 결제수단/금액 - 액션) */
+@media (max-width: 767.98px) {
+    .txn-table-head {
+        display: none;
+    }
+
+    .txn-row {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "day cat"
+            "desc desc"
+            "pay amount"
+            "action action";
+        gap: 6px 10px;
+        padding: 0.875rem 1.125rem;
+    }
+
+    .txn-row > *:nth-child(1) { grid-area: day; }
+    .txn-row > *:nth-child(2) { grid-area: cat; justify-self: end; }
+    .txn-row > *:nth-child(3) { grid-area: desc; }
+    .txn-row > *:nth-child(4) { grid-area: pay; }
+    .txn-row > *:nth-child(5) { grid-area: amount; justify-self: end; }
+    .txn-row > *:nth-child(6) { grid-area: action; justify-self: end; }
+
+    .txn-day {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: var(--sallim-balance);
+    }
+
+    .txn-desc {
+        white-space: normal;
+    }
+
+    .txn-amount {
+        font-size: 0.9375rem;
+    }
 }
 
 /* ===== 모달: 유형/카테고리/결제수단 선택 칩 ===== */
