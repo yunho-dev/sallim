@@ -174,7 +174,7 @@
 
                 <!-- 유저 -->
                 <div class="sidebar-user">
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2 sidebar-user-info">
                         <span class="avatar avatar-sm" style="background-color: var(--sallim-income); color: #fff; font-weight: 700;"
                               th:text="${loginMember != null ? #strings.substring(loginMember.nickname, 0, 1) : '?'}">
                             살
@@ -194,7 +194,7 @@
                                 <polyline points="16 17 21 12 16 7"/>
                                 <line x1="21" y1="12" x2="9" y2="12"/>
                             </svg>
-                            로그아웃
+                            <span class="sidebar-logout-text">로그아웃</span>
                         </button>
                     </form>
                 </div>
