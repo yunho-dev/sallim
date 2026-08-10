@@ -21,7 +21,7 @@ body {
 }
 
 .sallim-auth-card {
-    border-top: 3px solid var(--sallim-green);
+    border-top: 3px solid var(--sallim-income);
 }
 
 .sallim-logo-box {
@@ -31,7 +31,7 @@ body {
     width: 56px;
     height: 56px;
     border-radius: 14px;
-    background-color: var(--sallim-green);
+    background-color: var(--sallim-income);
     color: #fff;
     font-size: 1.5rem;
     font-weight: 700;
@@ -44,7 +44,7 @@ body {
 
 /* 포커스 시 input-group 전체에 딥그린 테두리 */
 .input-group-flat:focus-within {
-    border-color: var(--sallim-green);
-    box-shadow: 0 0 0 1px var(--sallim-green);
+    border-color: var(--sallim-income);
+    box-shadow: 0 0 0 1px var(--sallim-income);
     border-radius: var(--tblr-border-radius);
 }

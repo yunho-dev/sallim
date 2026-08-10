@@ -8,29 +8,9 @@
 
     <th:block layout:fragment="page-css">
         <style>
-            /* ===== 카드 공통 (시안: 1px 보더 + 10px 라운드, 그림자 없음) ===== */
-            .card {
-                border: 1px solid #e6e9ee;
-                border-radius: 10px;
-                box-shadow: none;
-            }
-
+            /* .card, .page-pretitle, .page-title 는 global.css 공통 정의 사용 */
             .card-body {
                 padding: 1.375rem 1.5rem;
-            }
-
-            /* ===== 페이지 헤더 ===== */
-            .page-pretitle {
-                color: #8a97a5;
-                font-weight: 600;
-                letter-spacing: 0.04em;
-            }
-
-            .page-title {
-                font-size: 1.4375rem; /* 23px */
-                font-weight: 800;
-                color: var(--sallim-balance);
-                letter-spacing: -0.01em;
             }
 
             .date-pill {

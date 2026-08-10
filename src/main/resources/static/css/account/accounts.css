@@ -1,37 +1,3 @@
-.card {
-    border: 1px solid #e6e9ee;
-    border-radius: 10px;
-    box-shadow: none;
-}
-
-.page-pretitle {
-    color: #8a97a5;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-}
-
-.page-title {
-    font-size: 1.4375rem;
-    font-weight: 800;
-    color: var(--sallim-balance);
-    letter-spacing: -0.01em;
-}
-
-.btn-add-dark {
-    background-color: var(--sallim-balance);
-    border-color: var(--sallim-balance);
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.84375rem;
-    padding: 0.5625rem 1.125rem;
-}
-
-.btn-add-dark:hover {
-    background-color: #293b4f;
-    border-color: #293b4f;
-    color: #fff;
-}
-
 /* ===== 전체 자산 요약 ===== */
 .asset-summary {
     background: #fff;

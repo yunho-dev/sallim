@@ -7,13 +7,51 @@
 }
 
 :root {
-    --sallim-green: #2D6A4F;
-    --sallim-terracotta: #C1604A;
-    --sallim-ink: #1E2D3D;
+    --sallim-income: #2D6A4F;
+    --sallim-expense: #C1604A;
+    --sallim-balance: #1E2D3D;
+    --sallim-sidebar-bg: #1E2D3D;
+    --sallim-sidebar-active: #2D6A4F;
 
-    --tblr-primary: #2D6A4F;
+    --tblr-primary: var(--sallim-income);
     --tblr-primary-rgb: 45, 106, 79;
 
     /* 폰트 토큰 */
     --tblr-font-sans-serif: 'Pretendard Variable', sans-serif;
+}
+
+/* ===== 공통 카드/타이틀 (account, category, payment, transaction 페이지 공통) ===== */
+.card {
+    border: 1px solid #e6e9ee;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.page-pretitle {
+    color: #8a97a5;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.page-title {
+    font-size: 1.4375rem;
+    font-weight: 800;
+    color: var(--sallim-balance);
+    letter-spacing: -0.01em;
+}
+
+/* ===== 추가 버튼(네이비) - account, payment 페이지 공통 ===== */
+.btn-add-dark {
+    background-color: var(--sallim-balance);
+    border-color: var(--sallim-balance);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.84375rem;
+    padding: 0.5625rem 1.125rem;
+}
+
+.btn-add-dark:hover {
+    background-color: #293b4f;
+    border-color: #293b4f;
+    color: #fff;
 }

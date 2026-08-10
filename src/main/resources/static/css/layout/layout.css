@@ -1,11 +1,3 @@
-:root {
-    --sallim-income: #2D6A4F;
-    --sallim-expense: #C1604A;
-    --sallim-balance: #1E2D3D;
-    --sallim-sidebar-bg: #1E2D3D;
-    --sallim-sidebar-active: #2D6A4F;
-}
-
 html {
     overflow-y: auto;
     scrollbar-gutter: stable;
