@@ -10,7 +10,7 @@
 | Database | PostgreSQL |
 | Frontend | Thymeleaf, Thymeleaf Layout Dialect, Tabler UI, ApexCharts |
 | Auth | JWT (jjwt) |
-| Infra | AWS (예정), GitHub Actions CI/CD (예정) |
+| Infra | AWS EC2, Docker, GitHub Actions CI/CD |
 
 ## 📐 ERD
 
