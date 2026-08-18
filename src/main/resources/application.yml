@@ -29,6 +29,11 @@ spring:
       chain:
         cache: false
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
 jwt:
   secret:
   expiration: 3600000
@@ -38,3 +43,8 @@ aes:
 
 hmac:
   secret-key:
+
+clova:
+  ocr:
+    secret-key:
+    invoke-url:

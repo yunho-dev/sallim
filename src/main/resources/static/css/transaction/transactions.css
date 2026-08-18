@@ -499,3 +499,84 @@
     text-align: right;
     font-weight: 700;
 }
+
+/* ===== 모달: 영수증 OCR 자동 채우기 =====
+   버튼 자체를 "여기 눌러서 업로드" 드롭존처럼 보이게 점선 테두리 + 옅은 배경으로 강조.
+   아래 뱃지(.ocr-review-badge)와 같은 amber 톤을 써서 "OCR 관련 요소"라는 시각적 일관성을 준다. */
+.ocr-fill-row {
+    display: block;
+}
+
+.btn-ocr-fill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0.8125rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #d48806;
+    background: rgba(212, 136, 6, 0.06);
+    border: 1.5px dashed rgba(212, 136, 6, 0.45);
+    border-radius: 10px;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-ocr-fill:hover {
+    background: rgba(212, 136, 6, 0.11);
+    border-color: rgba(212, 136, 6, 0.65);
+    color: #d48806;
+}
+
+.btn-ocr-fill:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 드래그한 파일이 버튼 위에 올라와 있는 동안의 강조 상태 */
+.btn-ocr-fill.ocr-fill-dragover {
+    background: rgba(212, 136, 6, 0.16);
+    border-color: #d48806;
+}
+
+.ocr-fill-hint {
+    margin-top: 6px;
+    text-align: center;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #a4afba;
+}
+
+/* "또는 직접 입력" 구분선 - 필터바의 .filter-divider와 같은 선 색상을 쓰되 라벨이 있는 버전 */
+.ocr-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 2px 0 1.125rem;
+    color: #a4afba;
+    font-size: 0.71875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.ocr-divider::before,
+.ocr-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e6e9ee;
+}
+
+.ocr-review-badge {
+    background: rgba(212, 136, 6, 0.12);
+    color: #d48806;
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 5px;
+}
+
+.form-control.ocr-filled {
+    border-color: #d48806;
+    background: rgba(212, 136, 6, 0.05);
+}

@@ -46,7 +46,47 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelectorAll('input[name="modal-type"]').forEach(input => {
     input.addEventListener('change', () => renderCategoryChips(input.value));
   });
+
+  document.getElementById('btnOcrFill').addEventListener('click', () => document.getElementById('ocrFileInput').click());
+  document.getElementById('ocrFileInput').addEventListener('change', handleOcrFileSelected);
+  bindOcrDropZone();
 });
+
+// 영수증 버튼 자체를 드롭존으로 사용 (점선 테두리 스타일이 이미 "여기에 놓으세요" 느낌을 준다)
+function bindOcrDropZone() {
+  const dropZone = document.getElementById('btnOcrFill');
+
+  dropZone.addEventListener('dragover', e => {
+    if (dropZone.disabled) return;
+    e.preventDefault();
+    dropZone.classList.add('ocr-fill-dragover');
+  });
+
+  dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('ocr-fill-dragover');
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('ocr-fill-dragover');
+    if (dropZone.disabled) return;
+
+    const files = e.dataTransfer.files;
+    if (files.length === 0) return;
+    if (files.length > 1) {
+      alert('이미지 파일은 한 번에 1개만 업로드할 수 있어요.');
+      return;
+    }
+
+    const error = validateOcrFile(files[0]);
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    fillFromReceipt(files[0]);
+  });
+}
 
 function changeMonth(delta) {
   const date = new Date(currentYear, currentMonth - 1 + delta, 1);
@@ -355,6 +395,125 @@ function openCreateModal() {
 
   renderCategoryChips('EXPENSE');
   renderPaymentChips();
+  resetOcrFillState();
+}
+
+// OCR로 채운 필드의 뱃지/테두리 표시를 초기화 (모달을 다시 열 때마다 이전 인식 결과 흔적 제거)
+function resetOcrFillState() {
+  OCR_FIELDS.forEach(({ input, badge }) => {
+    document.getElementById(input).classList.remove('ocr-filled');
+    document.getElementById(badge).classList.add('d-none');
+  });
+  document.getElementById('ocrPartialNotice').classList.add('d-none');
+  document.getElementById('ocrFileInput').value = '';
+}
+
+// OCR로 채워진 필드는 테두리 색 + "확인 필요" 뱃지로 표시해 사용자가 검토하도록 유도
+function markOcrFilled(inputId, badgeId) {
+  document.getElementById(inputId).classList.add('ocr-filled');
+  document.getElementById(badgeId).classList.remove('d-none');
+}
+
+const OCR_FIELDS = [
+  { input: 'txnDate', badge: 'txnDateBadge' },
+  { input: 'txnAmount', badge: 'txnAmountBadge' },
+  { input: 'txnDescription', badge: 'txnDescriptionBadge' },
+];
+
+// application.yml의 spring.servlet.multipart.max-file-size와 동일하게 맞춰야 함
+const OCR_MAX_FILE_SIZE_MB = 10;
+
+// 이미지 여부·용량 검증 - 파일 선택(input accept)과 드래그앤드롭 두 경로에서 공통으로 사용
+function validateOcrFile(file) {
+  if (!file.type.startsWith('image/')) {
+    return '이미지 파일만 업로드할 수 있어요.';
+  }
+  if (file.size > OCR_MAX_FILE_SIZE_MB * 1024 * 1024) {
+    return `파일 용량은 최대 ${OCR_MAX_FILE_SIZE_MB}MB까지 업로드할 수 있어요.`;
+  }
+  return null;
+}
+
+function handleOcrFileSelected(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const error = validateOcrFile(file);
+  if (error) {
+    alert(error);
+    e.target.value = '';
+    return;
+  }
+
+  fillFromReceipt(file);
+}
+
+// 영수증 이미지를 업로드해 날짜/금액/거래내용을 자동 채움. 카테고리·결제수단은 OCR로 뽑을 수 없어 건드리지 않는다.
+async function fillFromReceipt(file) {
+  const btn = document.getElementById('btnOcrFill');
+  const spinner = document.getElementById('ocrSpinner');
+  const label = document.getElementById('ocrFillLabel');
+
+  btn.disabled = true;
+  spinner.classList.remove('d-none');
+  label.textContent = '인식 중...';
+
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Accept 헤더를 안 보내면 인증 실패(401) 등 에러 응답을 Spring Boot 기본 에러 처리기가
+    // JSON이 아닌 Whitelabel HTML 페이지로 내려줘서 아래 res.json()이 깨진다. 명시적으로 JSON을 요청한다.
+    const res = await fetch('/api/ocr/receipt', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: formData,
+    });
+
+    const isJson = (res.headers.get('content-type') || '').includes('application/json');
+    if (!res.ok || !isJson) {
+      // 실패 응답이 JSON이 아닐 때가 많아(예: 업로드 용량 초과 시 서버 기본 에러 페이지) 원인 파악용으로 상태 코드만 콘솔에 남긴다.
+      console.error('영수증 OCR 요청 실패', res.status, res.statusText);
+      throw new Error(
+          res.status === 401
+              ? '로그인이 만료되었습니다. 다시 로그인 후 시도해주세요.'
+              : '영수증 인식에 실패했습니다. 직접 입력해주세요.'
+      );
+    }
+
+    const result = await res.json();
+    let hasMissing = false;
+
+    if (result.transactionDate) {
+      document.getElementById('txnDate').value = result.transactionDate;
+      markOcrFilled('txnDate', 'txnDateBadge');
+    } else {
+      hasMissing = true;
+    }
+
+    if (result.amount != null) {
+      document.getElementById('txnAmount').value = formatNumber(result.amount);
+      markOcrFilled('txnAmount', 'txnAmountBadge');
+    } else {
+      hasMissing = true;
+    }
+
+    if (result.merchantName) {
+      document.getElementById('txnDescription').value = result.merchantName;
+      markOcrFilled('txnDescription', 'txnDescriptionBadge');
+    } else {
+      hasMissing = true;
+    }
+
+    document.getElementById('ocrPartialNotice').classList.toggle('d-none', !hasMissing);
+  } catch (e) {
+    alert(e.message || '영수증 인식 중 오류가 발생했습니다. 직접 입력해주세요.');
+  } finally {
+    btn.disabled = false;
+    spinner.classList.add('d-none');
+    label.textContent = '📷 영수증으로 채우기';
+    document.getElementById('ocrFileInput').value = '';
+  }
 }
 
 // 카테고리 칩: 모달에서 선택된 유형(지출/수입)에 맞는 카테고리만 보여줌
