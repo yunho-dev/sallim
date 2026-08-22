@@ -36,6 +36,7 @@ public class SecurityConfig {
                         // 로그인/회원가입은 인증 전 상태에서 호출돼야 하는 경로라 예외적으로 permitAll
                         .requestMatchers(
                                 "/", "/login", "/signup",
+                                "/features", "/security", "/contact",
                                 "/api/members/login",
                                 "/api/members/signup",
                                 "/api/members/check-id",
