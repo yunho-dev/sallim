@@ -116,6 +116,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         width: 4, // 막대 사이의 미세한 간격을 벌려주는 흰색 테두리 효과
                         colors: ['transparent']
                     },
+                    // 모바일에서는 컨테이너 폭이 줄어드는데 columnWidth 비율(40%)은 그대로라
+                    // 6개월치 막대가 선처럼 얇아짐 - 폭을 넓히고 테두리도 얇춰서 보정
+                    responsive: [
+                        {
+                            breakpoint: 767.98,
+                            options: {
+                                chart: {height: 240},
+                                plotOptions: {bar: {columnWidth: '65%'}},
+                                stroke: {width: 2},
+                                xaxis: {labels: {style: {fontSize: '10px'}}},
+                                yaxis: {labels: {style: {fontSize: '10px'}}}
+                            }
+                        }
+                    ],
                     dataLabels: {enabled: false},
                     series: [
                         {name: '수입', data: rows.map((row) => row.income)},

@@ -24,6 +24,10 @@ body {
     border-top: 3px solid var(--sallim-income);
 }
 
+.sallim-back-link:hover {
+    color: var(--sallim-income) !important;
+}
+
 .sallim-logo-box {
     display: inline-flex;
     align-items: center;

@@ -14,6 +14,12 @@
   .nav-link:hover { color: #1E2D3D !important; }
   .btn-primary:hover { background: #245a42 !important; }
   .btn-secondary:hover { border-color: #b7c0c9 !important; background: #f7f8fa !important; }
+
+  /* 모바일에서는 헤더 폭이 좁아 로고/문의 링크/로그인·회원가입 버튼이 한 줄에서 겹치므로,
+     클릭 동작 없는 placeholder 링크(기능/보안/문의)는 숨기고 로고·버튼만 남긴다 */
+  @media (max-width: 767.98px) {
+    .site-nav { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -35,7 +41,7 @@
         </div>
         <span style="font-size:19px; font-weight:700; letter-spacing:-0.02em; color:#1E2D3D;">살림</span>
       </div>
-      <nav style="display:flex; align-items:center; gap:28px; flex:1; justify-content:center; min-width:0;">
+      <nav class="site-nav" style="display:flex; align-items:center; gap:28px; flex:1; justify-content:center; min-width:0;">
         <a href="#" class="nav-link" onclick="alert('준비중입니다.'); return false;" style="font-size:14.5px; font-weight:500; color:#3d4c5c;">기능</a>
         <a href="#" class="nav-link" onclick="alert('준비중입니다.'); return false;" style="font-size:14.5px; font-weight:500; color:#3d4c5c;">보안</a>
         <a href="#" class="nav-link" onclick="alert('준비중입니다.'); return false;" style="font-size:14.5px; font-weight:500; color:#3d4c5c;">문의</a>

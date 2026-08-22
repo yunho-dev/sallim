@@ -171,6 +171,14 @@
                 min-width: 86px;
                 text-align: right;
             }
+
+            /* 모바일에서는 카드 좌우 패딩을 줄여 차트가 그릴 수 있는 실제 폭을 넓힌다
+               (막대 폭은 columnWidth 비율이라, 컨테이너가 넓어질수록 막대도 두꺼워짐) */
+            @media (max-width: 767.98px) {
+                .card-body {
+                    padding: 1.125rem 1rem;
+                }
+            }
         </style>
 
         <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.min.js"></script>
