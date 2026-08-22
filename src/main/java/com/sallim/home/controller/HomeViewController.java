@@ -14,13 +14,13 @@ public class HomeViewController {
     public String index() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated()
-                && !(auth instanceof AnonymousAuthentiㄹcationToken)) {
+                && !(auth instanceof AnonymousAuthenticationToken)) {
             return "redirect:/dashboard";
         }
         return "index";
     }
 
-    // 랜딩 페이지 상단 메뉴(기능/보안/문의) - 현재는 빈 페이지, 페이지 내 콘텐츠는 추후 ajax로 채울 예정
+    // 랜딩 페이지 상단 메뉴(기능/보안/문의)
     @GetMapping("/features")
     public String features() {
         return "home/features";
